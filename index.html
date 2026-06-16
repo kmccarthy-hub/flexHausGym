@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlexHaus — The Comeback: Your spot's still here</title>
+  <meta name="description" content="Your spot's still here. Book your comeback class — Tuesday afternoon Strength with Marta. One tap to claim it.">
+  <meta name="theme-color" content="#0E1116">
+
+  <!-- Preconnect to Google Fonts + CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Three.js CDN via importmap -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    }
+  }
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- Fallback detection (synchronous, before paint) -->
+  <script src="assets/fallback.js"></script>
+</head>
+<body>
+
+  <!-- Skip link for keyboard users -->
+  <a href="#comeback-form" class="skip-link">Skip to booking form</a>
+
+  <!-- Canvas container for three.js scene -->
+  <div id="canvas-container" class="canvas-wrapper" aria-hidden="true" role="presentation"></div>
+
+  <!-- Scrollable content overlay -->
+  <div class="scroll-container">
+
+    <!-- ═══ SCENE 1: HERO ═══ -->
+    <section class="scene scene-hero" data-scene="hero" aria-label="Hero">
+      <div class="hero-content">
+        <h1 class="hero-headline display-headline">Your spot's still here.</h1>
+        <p class="hero-sub">We saved you a Tuesday afternoon Strength class with Marta. One tap to claim it.</p>
+        <a href="#" class="hero-cta full-mobile" aria-label="Book your comeback class">Book your comeback class</a>
+      </div>
+    </section>
+
+    <!-- ═══ SCENE 2: MOMENTUM ═══ -->
+    <section class="scene scene-momentum" data-scene="momentum" aria-label="Momentum builds">
+      <p class="momentum-text" data-reveal="1">You took a break.</p>
+      <p class="momentum-text" data-reveal="2">The class is still here.</p>
+      <p class="momentum-text" data-reveal="3">Your favourite instructor. Your favourite time. We held the spot.</p>
+    </section>
+
+    <!-- ═══ SCENE 3: PROOF ═══ -->
+    <section class="scene scene-proof" data-scene="proof" aria-label="Why now">
+      <div class="proof-grid">
+        <div class="proof-card">
+          <div class="proof-icon" aria-hidden="true">&#10140;</div>
+          <p class="proof-text">One class is all it takes to restart.</p>
+        </div>
+        <div class="proof-card">
+          <div class="proof-icon" aria-hidden="true">&#9829;</div>
+          <p class="proof-text">Tuesday afternoon Strength with Marta — your favourite.</p>
+        </div>
+        <div class="proof-card">
+          <div class="proof-icon" aria-hidden="true">&#9678;</div>
+          <p class="proof-text">We held your spot. Just show up.</p>
+        </div>
+      </div>
+      <div class="proof-stat">
+        <p class="proof-stat-text">Members who book a second class are 2x more likely to stay for the long haul.</p>
+        <p class="proof-stat-note">(From FlexHaus member data, 2024–2026)</p>
+      </div>
+      <div class="proof-stats-row">
+        <div class="proof-stat-card">
+          <span class="proof-stat-number">42%</span>
+          <p class="proof-stat-desc">of members never come back after their first class. Booking a second changes everything.</p>
+        </div>
+        <div class="proof-stat-card">
+          <span class="proof-stat-number">83.6%</span>
+          <p class="proof-stat-desc">of members show up for Tuesday classes — the highest attendance rate of any day.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ SCENE 4: COMEBACK CARD ═══ -->
+    <section class="scene scene-card" data-scene="card" aria-label="Book your comeback class">
+      <div class="booking-card" id="booking-card">
+
+        <!-- Default form state -->
+        <div class="form-default">
+          <h2 class="card-title">
+            <span class="card-title-icon" aria-hidden="true"></span>
+            Your Comeback Class
+          </h2>
+
+          <!-- Slot display -->
+          <div class="slot-display">
+            <span class="slot-info" id="slot-display">Tuesday, afternoon — Strength with Marta</span>
+            <button class="slot-change" id="slot-change" aria-expanded="false" aria-controls="picker-panel" type="button">Change</button>
+          </div>
+
+          <!-- Inline picker -->
+          <div class="picker-panel" id="picker-panel" role="region" aria-label="Change class details">
+            <div class="picker-group">
+              <label class="picker-label" for="picker-class">Class</label>
+              <select class="picker-select" id="picker-class">
+                <option value="Strength" selected>Strength</option>
+                <option value="Spin">Spin</option>
+                <option value="HIIT">HIIT</option>
+                <option value="Yoga">Yoga</option>
+                <option value="Pilates">Pilates</option>
+                <option value="Boxing">Boxing</option>
+                <option value="Mobility">Mobility</option>
+              </select>
+            </div>
+            <div class="picker-group">
+              <label class="picker-label" for="picker-day">Day</label>
+              <select class="picker-select" id="picker-day">
+                <option value="Tuesday" selected>Tuesday</option>
+                <option value="Wednesday">Wednesday</option>
+                <option value="Thursday">Thursday</option>
+                <option value="Friday">Friday</option>
+                <option value="Saturday">Saturday</option>
+                <option value="Monday">Monday</option>
+                <option value="Sunday">Sunday</option>
+              </select>
+            </div>
+            <div class="picker-group">
+              <label class="picker-label" for="picker-time">Time</label>
+              <select class="picker-select" id="picker-time">
+                <option value="Morning">Morning</option>
+                <option value="Afternoon" selected>Afternoon</option>
+                <option value="Evening">Evening</option>
+              </select>
+            </div>
+            <div class="picker-group">
+              <label class="picker-label" for="picker-instructor">Instructor</label>
+              <select class="picker-select" id="picker-instructor">
+                <option value="Marta" selected>Marta</option>
+                <option value="Conor">Conor</option>
+                <option value="Dev">Dev</option>
+                <option value="Niall">Niall</option>
+                <option value="Tom">Tom</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form id="comeback-form" data-formspree="" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="member-name">Your name</label>
+              <input class="form-input" type="text" id="member-name" name="name" required minlength="2" placeholder="e.g. Sarah" autocomplete="name">
+              <span class="form-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="member-contact">Email or phone</label>
+              <input class="form-input" type="text" id="member-contact" name="contact" required placeholder="e.g. sarah@email.com or +353 87 123 4567" autocomplete="email">
+              <span class="form-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="checkbox-group">
+              <label class="checkbox-label">
+                <input class="checkbox-input" type="checkbox" id="marketing-consent" name="consent">
+                <span>I'd like to hear about future classes (optional, unticked by default)</span>
+              </label>
+            </div>
+
+            <button class="btn-primary" type="submit" id="submit-booking" aria-label="Book your comeback class">
+              <span class="btn-text">Book your comeback class</span>
+              <span class="btn-spinner" aria-hidden="true"></span>
+            </button>
+          </form>
+
+          <p class="card-footer">You won't be charged. This reserves your spot. Cancel anytime.</p>
+
+          <!-- Error message area -->
+          <div class="error-message" id="error-message" role="alert">
+            <p class="error-text">Sorry, something didn't work. Try again or email us directly.</p>
+            <p class="error-fallback"><a href="mailto:hello@flexhaus.ie?subject=FlexHaus%20Comeback%20Booking">hello@flexhaus.ie</a></p>
+          </div>
+        </div>
+
+        <!-- Success state -->
+        <div class="success-message" id="success-message" role="status" aria-live="polite">
+          <div class="success-checkmark" aria-hidden="true">&#10003;</div>
+          <p class="success-text"><strong>You're in.</strong> Tuesday, afternoon — Strength with Marta. We'll see you there.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer class="footer" role="contentinfo">
+      <p>&copy; FlexHaus Gym. Show up for yourself.</p>
+      <p style="margin-top:4px;"><a href="mailto:hello@flexhaus.ie">hello@flexhaus.ie</a> &middot; <a href="#">Unsubscribe</a></p>
+    </footer>
+
+  </div>
+
+  <!-- Core page logic: form + scroll reveal (always runs, even if 3D fails) -->
+  <script src="assets/page.js"></script>
+
+  <!-- Three.js enhancement layer (module — may fail to load) -->
+  <script type="module" src="assets/main.js"></script>
+</body>
+</html>
